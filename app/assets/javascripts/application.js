@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require json2
+//= require mongo
 //= require underscore
 //= require backbone
 //= require backbone-rails
