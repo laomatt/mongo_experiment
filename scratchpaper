@@ -1,0 +1,17 @@
+var html = '<div id="'+this.model.get('_id').$oid+'" class="person-box">'+this.model.get('name')+'   <div class="options-box" id="links_for'+this.model.get('_id').$oid+'" >-<a class="remove-person" href="#"> Remove</a><a class="inspect-person" href="#">Inspect</a></div><br><div id="inspect-box'+this.model.get('_id').$oid+'" class="inspect-box">City: '+this.model.get('city')+'<br>State: '+this.model.get('state')+'<br><a class="edit-selection" href="#">Edit</a><a class="hide-inspect-box" href="#">Hide</a></div></div>'
+
+'<div id="<%= _id.$oid %>" class="person-box"><%= name %>   <div class="options-box" id="links_for<%= _id.$oid %>" >-<a class="remove-person" href="#"> Remove</a><a class="inspect-person" href="#">Inspect</a></div><br><div id="inspect-box<%= _id.$oid %>" class="inspect-box">City: <%= city %><br>State: <%= state%><br><a class="edit-selection" href="#">Edit</a><a class="hide-inspect-box" href="#">Hide</a></div></div>'
+
+
+'<div id="<%= _id.$oid %>" class="person-box"><%= name %>
+    <div class="options-box" id="links_for<%= _id.$oid %>" >-
+      <a class="remove-person" href="#"> Remove</a>
+      <a class="inspect-person" href="#">Inspect</a>
+    </div>
+    <br>
+    <div id="inspect-box<%= _id.$oid %>" class="inspect-box">
+      City: <%= city %><br>
+      State: <%= state%><br>
+        <a class="edit-selection" href="#">Edit</a>
+        <a class="hide-inspect-box" href="#">Hide</a></div>
+    </div>'
