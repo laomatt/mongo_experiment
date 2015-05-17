@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-# gem 'mongo', '~> 2.0'
+gem 'mongo', '~> 2.0'
 # gem 'bson'
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
