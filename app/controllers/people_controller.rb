@@ -8,6 +8,7 @@ class PeopleController < ApplicationController
   end
 
   def index_all
+    # Mongo::Client.new('mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters')
     people = Person.all
     render :json => people
   end
