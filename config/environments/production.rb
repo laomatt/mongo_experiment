@@ -1,26 +1,7 @@
   require "mongo"
   require "json"
-Rails.application.configure do
+  Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
-  # seed_data = [
-  #   {
-  #     'name' => '1970s',
-  #     'city' => 'Debby Boone',
-  #     'state' => 'You Light Up My Life',
-  #     'show' => '10'
-  #     },
-  #     {
-  #       'name' => '1980s',
-  #       'city' => 'Olivia Newton-John',
-  #       'state' => 'Physical',
-  #       'show' => '10'
-  #       }]
-
-        uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
-        client= Mongo::Client.new(uri)
-        # db=client.db("characters")
-        # chars = db.collections("characters")
 
 
   # Code is not reloaded between requests.
@@ -88,11 +69,16 @@ Rails.application.configure do
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
-config.i18n.fallbacks = true
+  config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+
+
+  uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
+  client= Mongo::Client.new(uri)
 end
