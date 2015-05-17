@@ -1,5 +1,5 @@
-  require "mongo"
-  require "json"
+  # require "mongo"
+  # require "json"
   Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
