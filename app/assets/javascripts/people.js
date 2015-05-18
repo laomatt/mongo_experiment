@@ -134,9 +134,9 @@ var PersonViewList=Backbone.View.extend({
 
 var list = new PersonList();
 
-list.fetch()
+// list.fetch()
 var viewList = new PersonViewList({collection: list})
-viewList.render()
+// viewList.render()
 
 
 $('body').on('submit', '.add-people-form', function(event) {
