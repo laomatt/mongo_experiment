@@ -1,19 +1,21 @@
+require 'rubygems'
 require 'mongo'
 
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-
+  include Mongo
   # GET /people
   # GET /people.json
   def index
-    # @people = Person.all
     uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
-    @client = Mongo::MongoClient.from_uri(uri)
+    @client = Mongo::Client.new(uri)
   end
 
   def index_all
     # people = Person.all
-    people =
+    uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
+    @client = Mongo::Client.new(uri)
+    people = @client[:people].find({})
     render :json => people
   end
 

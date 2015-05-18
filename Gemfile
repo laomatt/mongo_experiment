@@ -31,7 +31,7 @@ gem 'backbone-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'mongo'#, '~> 2.0'
+gem 'mongo', '~> 2.0'
 gem 'bson', '~>3.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
