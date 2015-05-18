@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
-gem 'mongo'
+# gem 'mongo', '~> 2.0'
+gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
+gem 'bson_ext'
 # gem 'bson'
-gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
+# gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use SCSS for stylesheets
