@@ -10,7 +10,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 require "rails/test_unit/railtie"
-# require "mongo"
+require "mongo"
 # require "json"
 
 # Require the gems listed in Gemfile, including any gems

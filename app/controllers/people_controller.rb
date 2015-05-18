@@ -1,15 +1,19 @@
+require 'mongo'
+
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    # @people = Person.all
+    uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
+    @client = Mongo::MongoClient.from_uri(uri)
   end
 
   def index_all
-    # Mongo::Client.new('mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters')
-    people = Person.all
+    # people = Person.all
+    people =
     render :json => people
   end
 
