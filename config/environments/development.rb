@@ -1,4 +1,6 @@
-Rails.application.configure do
+  # require "mongo"
+
+  Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -35,4 +37,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
+  # client= Mongo::Client.new(uri)
 end

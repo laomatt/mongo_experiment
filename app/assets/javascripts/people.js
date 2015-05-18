@@ -7,7 +7,7 @@ var Person = Backbone.Model.extend({
     name:"empty spot",
     city:'nowhere',
     state:'nowhere',
-    pic:'none',
+    pic:'http://images.clipartpanda.com/sad-girl-stick-figure-image.png',
     show:'no show',
   },
   urlRoot: '/accounts',
@@ -19,12 +19,15 @@ var Person = Backbone.Model.extend({
       url: 'people/'+this.get('_id').$oid,
       type: 'DELETE',
     }).done(function(data){
+      console.log(data)
       setTimeout(function(){
         $("#"+id).fadeOut(1500);
       })
 
-      var divs_to_shake = $('#people-list').children()
-      setTimeout(slide_and_shake(divs_to_shake),100)
+
+
+      // var divs_to_shake = $('#people-list').children()
+      // setTimeout(slide_and_shake(divs_to_shake),100)
 
     })
   },
@@ -81,7 +84,7 @@ var PersonView=Backbone.View.extend({
     })
   },
   edit: function(){
-    var editform = '<form class="edit-form" action="#"><input type="text" name="new-name" value="'+this.model.get('name')+'"><input type="text" name="new-city" value="'+this.model.get('city')+'"><input type="text" name="new-state" value="'+this.model.get('state')+'"><input type="text" name="new-pic" placeholder="new picture"><input type="text" name="new-show" placeholder="show"><input type="submit"></form><a class="hide-inspect-box" href="#">Hide</a>'
+    var editform = '<form class="edit-form" action="#"><input type="text" name="new-name" value="'+this.model.get('name')+'"><input type="text" name="new-city" value="'+this.model.get('city')+'"><input type="text" name="new-state" value="'+this.model.get('state')+'"><input type="text" name="new-pic" value="http://images.clipartpanda.com/sad-girl-stick-figure-image.png"><input type="text" name="new-show" placeholder="'+this.model.get('show')+'"><input type="submit"></form><a class="hide-inspect-box" href="#">Hide</a>'
     $("#inspect-box"+this.model.get('_id').$oid).html(editform)
   },
   dbsub: function(event){
@@ -117,7 +120,6 @@ var PersonViewList=Backbone.View.extend({
     var viewPerson= new PersonView({model:person, url: '/people'});
     this.$el.append(viewPerson.el);
     viewPerson.render()
-
 
     $('#people-list').append(viewPerson.el);
     viewPerson.model.create()
