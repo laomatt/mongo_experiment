@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
-# gem 'mongo', '~> 2.0'
-gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
-gem 'bson_ext'
-# gem 'bson'
+
+# gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
+# gem 'bson_ext'
 # gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -32,7 +31,8 @@ gem 'backbone-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'bson', '~>3.0'
+gem 'mongo', '~> 2.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
