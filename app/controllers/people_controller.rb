@@ -27,7 +27,6 @@ class PeopleController < ApplicationController
   def edit
   end
 
-
   def create
     uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
     @client = Mongo::Client.new(uri)
