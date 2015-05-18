@@ -6,8 +6,7 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   include Mongo
   include BSON
-  # GET /people
-  # GET /people.json
+
   def index
   end
 
@@ -42,7 +41,9 @@ class PeopleController < ApplicationController
     new_info={name:params[:name],city:params[:city],state:params[:show],show:params[:show],pic:params[:pic]}
     uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
     @client = Mongo::Client.new(uri)
-    per = @client[:people].find({:_id => BSON::ObjectId.from_string(params[:id])}).delete_many
+    per = @client[:people].find({:_id => BSON::ObjectId.from_string(params[:id])})
+    per.update_one(new_info)
+
     render :json => per
   end
 
@@ -50,6 +51,7 @@ class PeopleController < ApplicationController
     uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
     @client = Mongo::Client.new(uri)
     per = @client[:people].find({:_id => BSON::ObjectId.from_string(params[:id])}).delete_many
+
     render :json => per
   end
 

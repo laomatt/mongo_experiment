@@ -84,7 +84,7 @@ var PersonView=Backbone.View.extend({
     })
   },
   edit: function(){
-    var editform = '<form class="edit-form" action="#"><input type="text" name="new-name" value="'+this.model.get('name')+'"><input type="text" name="new-city" value="'+this.model.get('city')+'"><input type="text" name="new-state" value="'+this.model.get('state')+'"><input type="text" name="new-pic" placeholder="new picture"><input type="text" name="new-show" placeholder="show"><input type="submit"></form><a class="hide-inspect-box" href="#">Hide</a>'
+    var editform = '<form class="edit-form" action="#"><input type="text" name="new-name" value="'+this.model.get('name')+'"><input type="text" name="new-city" value="'+this.model.get('city')+'"><input type="text" name="new-state" value="'+this.model.get('state')+'"><input type="text" name="new-pic" value="http://images.clipartpanda.com/sad-girl-stick-figure-image.png"><input type="text" name="new-show" placeholder="'+this.model.get('show')+'"><input type="submit"></form><a class="hide-inspect-box" href="#">Hide</a>'
     $("#inspect-box"+this.model.get('_id').$oid).html(editform)
   },
   dbsub: function(event){
