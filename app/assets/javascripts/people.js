@@ -7,7 +7,7 @@ var Person = Backbone.Model.extend({
     name:"empty spot",
     city:'nowhere',
     state:'nowhere',
-    pic:'none',
+    pic:'http://images.clipartpanda.com/sad-girl-stick-figure-image.png',
     show:'no show',
   },
   urlRoot: '/accounts',
@@ -19,12 +19,15 @@ var Person = Backbone.Model.extend({
       url: 'people/'+this.get('_id').$oid,
       type: 'DELETE',
     }).done(function(data){
+      console.log(data)
       setTimeout(function(){
         $("#"+id).fadeOut(1500);
       })
 
-      var divs_to_shake = $('#people-list').children()
-      setTimeout(slide_and_shake(divs_to_shake),100)
+
+
+      // var divs_to_shake = $('#people-list').children()
+      // setTimeout(slide_and_shake(divs_to_shake),100)
 
     })
   },
@@ -117,7 +120,6 @@ var PersonViewList=Backbone.View.extend({
     var viewPerson= new PersonView({model:person, url: '/people'});
     this.$el.append(viewPerson.el);
     viewPerson.render()
-
 
     $('#people-list').append(viewPerson.el);
     viewPerson.model.create()
