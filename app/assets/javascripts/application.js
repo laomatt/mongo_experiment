@@ -16,5 +16,6 @@
 //= require json2
 //= require underscore
 //= require backbone
+//= require handlebars
 //= require backbone-rails
 //= require_tree .

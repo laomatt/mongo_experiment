@@ -1,6 +1,4 @@
 $(document).on("page:change", function(){
-
-
 //my model for my person object
 var Person = Backbone.Model.extend({
   defaults: {
@@ -23,12 +21,6 @@ var Person = Backbone.Model.extend({
       setTimeout(function(){
         $("#"+id).fadeOut(1500);
       })
-
-
-
-      // var divs_to_shake = $('#people-list').children()
-      // setTimeout(slide_and_shake(divs_to_shake),100)
-
     })
   },
   save: function(){
@@ -56,14 +48,8 @@ var PersonView=Backbone.View.extend({
   },
   remove_data: function(){
     this.model.remove()
-    // var divs_to_shake = $('#people-list').children()
-    // setTimeout(slide_and_shake(divs_to_shake),100)
-
-    // this.remove()
-
   },
   inspect: function(){
-    // $("#inspect-box"+this.model.get('_id').$oid).css('display','block')
     var that=this;
     setTimeout(function(){
       $("#screen").css('display','block')
@@ -74,7 +60,6 @@ var PersonView=Backbone.View.extend({
 
   },
   hide: function(){
-    // $("#inspect-box"+this.model.get('_id').$oid).css('display','none')
     var that=this;
     setTimeout(function(){
       $("#inspect-box"+that.model.get('_id').$oid).slideUp('400', function() {
@@ -127,8 +112,6 @@ var PersonViewList=Backbone.View.extend({
     setTimeout(function(){
       $("#"+viewPerson.model.get('_id').$oid).fadeIn(1500);
     })
-
-
   }
 })
 

@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'mongo'
 require 'bson'
+require 'dotenv'
 
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
@@ -11,8 +12,7 @@ class PeopleController < ApplicationController
   end
 
   def index_all
-    uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
-    @client = Mongo::Client.new(uri)
+    @client = Mongo::Client.new(ENV['uri'])
     people = @client[:people].find({})
     render :json => people
   end
@@ -28,29 +28,23 @@ class PeopleController < ApplicationController
   end
 
   def create
-    uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
-    @client = Mongo::Client.new(uri)
+    @client = Mongo::Client.new(ENV['uri'])
     in_data={name:params[:name], city:params[:city], state: params[:state],pic:params[:pic],show:params[:show]}
     @client[:people].insert_one(in_data)
-
     render :json => @client[:people].find(in_data).first
   end
 
   def update
     new_info={name:params[:name],city:params[:city],state:params[:show],show:params[:show],pic:params[:pic]}
-    uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
-    @client = Mongo::Client.new(uri)
+    @client = Mongo::Client.new(ENV['uri'])
     per = @client[:people].find({:_id => BSON::ObjectId.from_string(params[:id])})
     per.update_one(new_info)
-
     render :json => per
   end
 
   def destroy
-    uri="mongodb://matt_lao:trouble@ds031822.mongolab.com:31822/characters"
-    @client = Mongo::Client.new(uri)
+    @client = Mongo::Client.new(ENV['uri'])
     per = @client[:people].find({:_id => BSON::ObjectId.from_string(params[:id])}).delete_many
-
     render :json => per
   end
 
@@ -62,8 +56,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      p 'y'*90
-      p params
       params.require(:person).permit(:name, :city, :state)
     end
   end
