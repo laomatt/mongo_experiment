@@ -75,7 +75,7 @@ var PersonView=Backbone.View.extend({
   dbsub: function(event){
     event.preventDefault();
     this.model.set({name: $('input[name="new-name"]').val(), city: $('input[name="new-city"]').val(), state: $('input[name="new-state"]').val(), pic: $('input[name="new-pic"]').val(), show: $('input[name="new-show"]').val()}
-    );
+      );
     this.model.save();
     $(".edit-form").trigger('reset');
     this.hide();
@@ -92,7 +92,7 @@ var PersonList = Backbone.Collection.extend({
   url: '/peopleall'
 });
 
-
+var elements_in_DOM=[]
 //viewlist for in the people list
 var PersonViewList=Backbone.View.extend({
   initialize: function(){
@@ -108,6 +108,7 @@ var PersonViewList=Backbone.View.extend({
 
     $('#people-list').append(viewPerson.el);
     viewPerson.model.create()
+    elements_in_DOM.push(viewPerson.model.get('_id').$oid)
     $("#"+viewPerson.model.get('_id').$oid).css('display','none')
     setTimeout(function(){
       $("#"+viewPerson.model.get('_id').$oid).fadeIn(1500);
@@ -145,6 +146,48 @@ $('body').on('mouseout', '.person-box', function(event) {
   var id=$(this).attr('id')
   $("#links_for"+id).css('display','none')
 });
+
+function get_and_add(id){
+      $.ajax({
+          url: '/oneperson/'+id,
+        })
+        .done(function(data) {
+          // debugger
+          viewList.addOne(new Person(data[0]))
+        })
+}
+
+
+function check_for_updates(){
+  $.ajax({
+    url: '/check'
+  })
+  .done(function(data){
+    var ids=[]
+    for(var r in data){
+      ids.push(data[r].$oid)
+    }
+    //first we check if we have ids in the DB that are not in the DOM
+    for(var g in ids){
+      if(elements_in_DOM.indexOf(ids[g]) < 0){
+        get_and_add(ids[g])
+      }
+  }
+    //now we check if there are ids in the DOM that arn't in the DB
+    for(var g in elements_in_DOM){
+      if(ids.indexOf(elements_in_DOM[g]) < 0){
+        $("#"+elements_in_DOM[g]).fadeOut(1500);
+      }
+    }
+
+})
+
+
+}
+
+setInterval(check_for_updates, 1000)
+
+
 
 })
 
