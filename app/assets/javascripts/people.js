@@ -13,6 +13,13 @@ var Person = Backbone.Model.extend({
   },
   remove:function(){
     var id=this.get('_id').$oid
+    //remove the _id from the elements_in_DOM array
+    for(var t in elements_in_DOM){
+      if(elements_in_DOM[t]==id){
+        elements_in_DOM.remove(t);
+      }
+    }
+    //remove the elements in the DB, then remove it in the DOM
     $.ajax({
       url: 'people/'+this.get('_id').$oid,
       type: 'DELETE',
@@ -147,15 +154,7 @@ $('body').on('mouseout', '.person-box', function(event) {
   $("#links_for"+id).css('display','none')
 });
 
-function get_and_add(id){
-      $.ajax({
-          url: '/oneperson/'+id,
-        })
-        .done(function(data) {
-          // debugger
-          viewList.addOne(new Person(data[0]))
-        })
-}
+
 
 
 function check_for_updates(){
@@ -163,31 +162,60 @@ function check_for_updates(){
     url: '/check'
   })
   .done(function(data){
-    var ids=[]
+    var elements_in_DATABASE=[]
     for(var r in data){
-      ids.push(data[r].$oid)
+      elements_in_DATABASE.push(data[r].$oid)
     }
-    //first we check if we have ids in the DB that are not in the DOM
-    for(var g in ids){
-      if(elements_in_DOM.indexOf(ids[g]) < 0){
-        get_and_add(ids[g])
+    //first we check if we have element _ids in the DB that are not in the DOM
+    for(var g in elements_in_DATABASE){
+      if(elements_in_DOM.indexOf(elements_in_DATABASE[g]) < 0){
+        $.ajax({
+          url: '/oneperson/'+elements_in_DATABASE[g],
+        })
+        .done(function(data) {
+          viewList.addOne(new Person(data[0]))
+        })
       }
-  }
-    //now we check if there are ids in the DOM that arn't in the DB
+    }
+    //now we check if there are element _ids in the DOM that arn't in the DB
     for(var g in elements_in_DOM){
-      if(ids.indexOf(elements_in_DOM[g]) < 0){
+      if(elements_in_DATABASE.indexOf(elements_in_DOM[g]) < 0){
         $("#"+elements_in_DOM[g]).fadeOut(1500);
       }
     }
-
+  // }
 })
-
-
 }
 
+
+
+var myDataRef = new Firebase('https://intense-wildwood-8483.firebaseIO.com/');
+//   myDataRef.on('load', function(snapshot) {
+//     console.log(snapshot.val())
+//     var m = snapshot.val()
+//     $("#messages").append(m.textlist+"<br>")
+//   });
+
+
+$('body').on('submit', '.chat-message', function(event) {
+  event.preventDefault();
+  var text=$("#user-message").val()
+  myDataRef.push({textlist:text})
+
+  $("#messages").html('')
+  myDataRef.on('child_added', function(snapshot) {
+    console.log(snapshot.val())
+    var m = snapshot.val()
+    $("#messages").append(m.textlist+"<br>")
+  });
+  var height = $("#messages")[0].scrollHeight
+  $("#messages").scrollTop(height)
+  $(this).trigger('reset')
+});
+
+
+
 // setInterval(check_for_updates, 7000)
-
-
 
 })
 

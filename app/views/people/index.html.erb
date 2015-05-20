@@ -1,12 +1,24 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="people-container">
 <h1>Characters and shows</h1>
+<div class="people-container">
 <div class="screen" id="screen"></div>
 <div id="people-list" class="people-list"></div>
 
+<div id="chat-box" class="chat-box">
+<div id="messages" class="messages"></div>
+<div id="message-form" class="message-form">
 
+
+  <form id="chat-message" class="chat-message" action="#">
+    <input type="text" id="user-message" class="chat-message message" placeholder="message here" name="message">
+    <input type="submit" class="chat-message button-message" class="chat-message">
+  </form>
+</div>
+
+
+</div>
 
 <div class="add-people-box" id="add-people-box">
 <form class="add-people-form">
