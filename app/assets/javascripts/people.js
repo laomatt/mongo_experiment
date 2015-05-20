@@ -185,7 +185,7 @@ function check_for_updates(){
 
 }
 
-setInterval(check_for_updates, 1000)
+setInterval(check_for_updates, 7000)
 
 
 
