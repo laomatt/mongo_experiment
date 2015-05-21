@@ -27,6 +27,21 @@ class PeopleController < ApplicationController
   def edit
   end
 
+  def update_periodically
+    @client = Mongo::Client.new(ENV['uri'])
+    people = @client[:people].find({})
+    people_ids=people.map { |e| e["_id"] }
+
+    render :json =>people_ids
+  end
+
+  def get_one_obj
+    @client = Mongo::Client.new(ENV['uri'])
+    person = @client[:people].find({:_id => BSON::ObjectId.from_string(params[:id])})
+    p person
+    render :json => person
+  end
+
   def create
     @client = Mongo::Client.new(ENV['uri'])
     in_data={name:params[:name], city:params[:city], state: params[:state],pic:params[:pic],show:params[:show]}

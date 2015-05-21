@@ -38,11 +38,14 @@
   display: inline;
   overflow: scroll;
   position: relative;
+  background-color: transparent;
+  width: 40%;
   padding: 2%;
-  left: 30%;
-  float: center;
+  left: 10%;
+  float: left;
   margin: 5px;
-  height: 50%;
+  height: 100%;
+  overflow: scroll;
 }
 
 .add-people-box{
@@ -50,7 +53,7 @@
   position: relative;
   text-align: center;
   background-color: transparent;
-  left: 35%;
+  left: 15%;
   height: 50%;
   width: 34%;
 }
@@ -99,7 +102,7 @@ a{
 
 .person-box{
   position: relative;
-  width: 40%;
+  width: 100%;
   height: 90%;
   top:0%;
   padding: 2%;
@@ -122,4 +125,51 @@ a{
   opacity: 0.5;
   z-index: 4;
   display: none;
+}
+
+.chat-box{
+  position: relative;
+  float: right;
+  width: 40%;
+  height: 90%;
+  background-color: transparent;
+}
+
+.messages{
+  background-color: white;
+  position: relative;
+  font-size:50px;
+  line-height: 50px;
+  width: 100%;
+  height: 80%;
+  overflow: scroll;
+  text-align: left;
+
+}
+
+.message-form{
+  position: relative;
+  width: 100%;
+  height: 20%;
+  background-color: transparent;
+
+}
+
+.chat-message{
+  position: relative;
+  height: 100%;
+  width: 90%;
+  margin: 2%;
+}
+
+.message{
+  height: 40%;
+  width: 100%;
+  font-size:50px;
+}
+
+.button-message{
+  height: 40%;
+  width: 40%;
+  float: right;
 }

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get '/check' => 'people#update_periodically'
   get '/peopleall' => 'people#index_all'
+  get '/oneperson/:id' => 'people#get_one_obj'
   resources :people
 
   # The priority is based upon order of creation: first created -> highest priority.

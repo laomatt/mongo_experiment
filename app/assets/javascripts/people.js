@@ -1,5 +1,7 @@
 $(document).on("page:change", function(){
 //my model for my person object
+var firebase_chars = new Firebase("https://tvcharacters.firebaseIO.com")
+
 var Person = Backbone.Model.extend({
   defaults: {
     name:"empty spot",
@@ -10,14 +12,22 @@ var Person = Backbone.Model.extend({
   },
   urlRoot: '/accounts',
   create:function(){
+
   },
   remove:function(){
     var id=this.get('_id').$oid
+    //remove the _id from the elements_in_DOM array
+    // for(var t in elements_in_DOM){
+    //   if(elements_in_DOM[t]==id){
+    //     elements_in_DOM.remove(t);
+    //   }
+    // }
+    //remove the elements in the DB, then remove it in the DOM
     $.ajax({
       url: 'people/'+this.get('_id').$oid,
       type: 'DELETE',
     }).done(function(data){
-      console.log(data)
+      firebase_chars.push({})
       setTimeout(function(){
         $("#"+id).fadeOut(1500);
       })
@@ -75,7 +85,7 @@ var PersonView=Backbone.View.extend({
   dbsub: function(event){
     event.preventDefault();
     this.model.set({name: $('input[name="new-name"]').val(), city: $('input[name="new-city"]').val(), state: $('input[name="new-state"]').val(), pic: $('input[name="new-pic"]').val(), show: $('input[name="new-show"]').val()}
-    );
+      );
     this.model.save();
     $(".edit-form").trigger('reset');
     this.hide();
@@ -92,7 +102,7 @@ var PersonList = Backbone.Collection.extend({
   url: '/peopleall'
 });
 
-
+var elements_in_DOM=[]
 //viewlist for in the people list
 var PersonViewList=Backbone.View.extend({
   initialize: function(){
@@ -108,6 +118,7 @@ var PersonViewList=Backbone.View.extend({
 
     $('#people-list').append(viewPerson.el);
     viewPerson.model.create()
+    elements_in_DOM.push(viewPerson.model.get('_id').$oid)
     $("#"+viewPerson.model.get('_id').$oid).css('display','none')
     setTimeout(function(){
       $("#"+viewPerson.model.get('_id').$oid).fadeIn(1500);
@@ -124,6 +135,7 @@ viewList.render()
 
 $('body').on('submit', '.add-people-form', function(event) {
   event.preventDefault();
+  firebase_chars.push({name:$("input[name='name']").val(), city:$("input[name='city']").val(), state:$("input[name='state']").val(), show:$("input[name='show']").val(), pic:$("input[name='pic']").val()})
   $.ajax({
     url: '/people',
     type: 'POST',
@@ -145,6 +157,70 @@ $('body').on('mouseout', '.person-box', function(event) {
   var id=$(this).attr('id')
   $("#links_for"+id).css('display','none')
 });
+
+firebase_chars.on('child_added', function(snapshot) {
+  check_for_updates()
+});
+
+
+firebase_chars.on('child_added', function(snapshot) {
+  check_for_updates()
+});
+
+
+function check_for_updates(){
+  $.ajax({
+    url: '/check'
+  })
+  .done(function(data){
+    var elements_in_DATABASE=[]
+    for(var r in data){
+      elements_in_DATABASE.push(data[r].$oid)
+    }
+    //first we check if we have element _ids in the DB that are not in the DOM
+    for(var g in elements_in_DATABASE){
+      if(elements_in_DOM.indexOf(elements_in_DATABASE[g]) < 0){
+        $.ajax({
+          url: '/oneperson/'+elements_in_DATABASE[g],
+        })
+        .done(function(data) {
+          viewList.addOne(new Person(data[0]))
+        })
+      }
+    }
+    //now we check if there are element _ids in the DOM that arn't in the DB
+    for(var g in elements_in_DOM){
+      if(elements_in_DATABASE.indexOf(elements_in_DOM[g]) < 0){
+        $("#"+elements_in_DOM[g]).fadeOut(1500);
+      }
+    }
+  // }
+})
+}
+
+
+
+var myDataRef = new Firebase('https://intense-wildwood-8483.firebaseIO.com/');
+
+
+$('body').on('submit', '.chat-message', function(event) {
+  event.preventDefault();
+  var text=$("#user-message").val()
+  myDataRef.push({textlist:text})
+
+  $("#messages").html('')
+  myDataRef.on('child_added', function(snapshot) {
+    var m = snapshot.val()
+    $("#messages").append(m.textlist+"<br>")
+  });
+  var height = $("#messages")[0].scrollHeight
+  $("#messages").scrollTop(height)
+  $(this).trigger('reset')
+});
+
+
+
+// setInterval(check_for_updates, 7000)
 
 })
 
