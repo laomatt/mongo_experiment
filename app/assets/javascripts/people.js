@@ -158,8 +158,13 @@ $('body').on('mouseout', '.person-box', function(event) {
   $("#links_for"+id).css('display','none')
 });
 
+
+
+
 firebase_chars.on('child_added', function(snapshot) {
   check_for_updates()
+var hit_noise=new Audio("http://laomatt.github.io/ding.wav")
+hit_noise.play();
 });
 
 
