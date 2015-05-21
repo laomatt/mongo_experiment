@@ -27,7 +27,7 @@ var Person = Backbone.Model.extend({
       url: 'people/'+this.get('_id').$oid,
       type: 'DELETE',
     }).done(function(data){
-      firebase_chars.push({})
+      firebase_chars.push({name:$("input[name='name']").val(), city:$("input[name='city']").val(), state:$("input[name='state']").val(), show:$("input[name='show']").val(), pic:$("input[name='pic']").val()})
       setTimeout(function(){
         $("#"+id).fadeOut(1500);
       })
@@ -163,12 +163,13 @@ firebase_chars.on('child_added', function(snapshot) {
 });
 
 
-firebase_chars.on('child_added', function(snapshot) {
-  check_for_updates()
-});
+// firebase_chars.on('child_removed', function(snapshot) {
+//   check_for_updates()
+// });
 
 
 function check_for_updates(){
+  console.log("this is happening lksdajflksad")
   $.ajax({
     url: '/check'
   })
