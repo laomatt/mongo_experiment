@@ -27,39 +27,49 @@
   background-position: center;
   background-size: 100%;
   text-align: center;
-  left: 10%;
+  left: 0%;
   top: 5%;
   height: 80%;
-  width: 80%;
+  width: 60%;
   overflow: scroll;
 }
 
-#people-list{
-  display: inline;
-  overflow: scroll;
+.people-list{
+  /*display: inline;*/
+  /*overflow: scroll;*/
   position: relative;
   background-color: transparent;
-  width: 40%;
+  width: 90%;
   padding: 2%;
-  left: 10%;
+  left: 0%;
   float: left;
   margin: 5px;
   height: 100%;
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
 
 .add-people-box{
   line-height: 100px;
-  position: relative;
+  position: fixed;
   text-align: center;
   background-color: transparent;
-  left: 15%;
-  height: 50%;
-  width: 34%;
+  /*left: 15%;*/
+  right: 0%;
+  height: 100%;
+  width: 30%;
+  padding: 2%;
 }
 
 .add-people-form{
-  float: center;
+  /*float: center;*/
+  position: relative;
+  height: 40%;
+  bottom: 0%;
+  background-color: white;
+
+  padding: 2%;
+  border-color: black;
+  border-style: solid;
 }
 
 .enter-form{
@@ -78,6 +88,9 @@ a{
 }
 
 .options-box{
+  position: relative;
+  width: 30%;
+  right: 0%;
   float: right;
   display: none;
 }
@@ -88,12 +101,12 @@ a{
   border-radius: 10px;
   border-color: black;
   border-style: solid;
-  width: 100%;
+  width: 50%;
   height: 30%;
   line-height: 40px;
   padding: 2%;
   top: 10%;
-  right: 20%;
+  right: 10%;
   bottom: 0%;
   float: right;
   display: none;
@@ -118,9 +131,11 @@ a{
 }
 
 .screen{
-  position: absolute;
-  width: 90%;
-  height: 80%;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 1000%;
+  height: 1000%;
   background-color: black;
   opacity: 0.5;
   z-index: 4;
