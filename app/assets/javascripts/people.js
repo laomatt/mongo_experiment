@@ -27,7 +27,7 @@ var Person = Backbone.Model.extend({
       url: 'people/'+this.get('_id').$oid,
       type: 'DELETE',
     }).done(function(data){
-      firebase_chars.push({name:$("input[name='name']").val(), city:$("input[name='city']").val(), state:$("input[name='state']").val(), show:$("input[name='show']").val(), pic:$("input[name='pic']").val()})
+      firebase_chars.push({name:"", city:"", state:"", show:"", pic:""})
       setTimeout(function(){
         $("#"+id).fadeOut(1500);
       })
@@ -135,7 +135,7 @@ viewList.render()
 
 $('body').on('submit', '.add-people-form', function(event) {
   event.preventDefault();
-  firebase_chars.push({name:$("input[name='name']").val(), city:$("input[name='city']").val(), state:$("input[name='state']").val(), show:$("input[name='show']").val(), pic:$("input[name='pic']").val()})
+  firebase_chars.push({name:"", city:"", state:"", show:"", pic:""})
   $.ajax({
     url: '/people',
     type: 'POST',
@@ -160,17 +160,12 @@ $('body').on('mouseout', '.person-box', function(event) {
 
 
 
+var hit_noise=new Audio("http://laomatt.github.io/ding.wav")
 
 firebase_chars.on('child_added', function(snapshot) {
   check_for_updates()
-var hit_noise=new Audio("http://laomatt.github.io/ding.wav")
-hit_noise.play();
+  // hit_noise.play();
 });
-
-
-// firebase_chars.on('child_removed', function(snapshot) {
-//   check_for_updates()
-// });
 
 
 function check_for_updates(){
